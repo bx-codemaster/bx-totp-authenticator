@@ -1,0 +1,366 @@
+{config_load file="$language/lang_$language.conf" section="account"}
+{config_load file="lang_bx_two_factor_`$language`.custom"}
+
+<h1 class="title">{#two_factor_auth_title#}</h1>
+
+{* Messages *}
+{if $messages}
+  {foreach $messages as $message}
+    {if $message.type == 'error'}
+      <div class="errormessage">
+        {$message.text}
+      </div>
+    {elseif $message.type == 'success'}
+      <div class="successmessage">
+        {$message.text}
+      </div>
+    {/if}
+  {/foreach}
+{/if}
+
+{* ===== SHOW BACKUP CODES ===== *}
+{if $show_backup_codes}
+<div class="highlightbox cf">
+  <h4><i class="fas fa-life-ring"></i> {#backup_codes_heading#}</h4>
+  <p><strong>{#backup_codes_important#}</strong> {#backup_codes_save_info#}</p>
+  <p>{#backup_codes_single_use#}</p>
+
+  <div class="backup_codes_grid">
+    {foreach $backup_codes as $code}
+      <div class="backup_code_item">{$code}</div>
+    {/foreach}
+  </div>
+
+  {if $tcpdf_available}
+  <a href="{$link_download_pdf}" title="{#backup_codes_download_pdf#}">
+    <span class="cssButton cssButtonColor2" title="{#backup_codes_download_pdf#}" style="width: auto;">
+      <span class="cssButtonText">{#backup_codes_download_pdf#}</span>
+      <span class="cssButtonIcon"><i class="fas fa-file-pdf"></i></span>
+    </span>
+  </a>
+  {/if}
+
+  <a href="{$link_account}" title="{#backup_codes_saved_continue#}">
+    <span class="cssButton cssButtonColor2" title="{#backup_codes_saved_continue#}" style="width: auto; margin-left: 10px;">
+      <span class="cssButtonText">{#backup_codes_saved_continue#}</span>
+      <span class="cssButtonIcon"><i class="fas fa-check"></i></span>
+    </span>
+  </a>
+</div> <!-- End highlightbox -->
+
+{* ===== TOTP SETUP ===== *}
+{elseif $current_action == 'setup_totp'}
+
+<div class="highlightbox">
+  <h2 style="margin-top: 0;"><i class="fas fa-shield-alt"></i> {#totp_setup_heading#}</h2>
+  <h4>{#totp_setup_step1#}</h4>
+  {if $totp_qr_code_available && $totp_qr_code}
+    <p style="text-align: center;">{#totp_setup_scan_info#}</p>
+    <div class="qr_code_box">
+      <img src="{$totp_qr_code}" alt="QR Code" style="margin: 0 auto; max-height: 200px;">
+    </div>
+  {else}
+    <div class="infomessage" style="margin: 5px 0">
+      <strong>{#totp_setup_qr_unavailable#}</strong> {#totp_setup_manual_entry#}
+    </div>
+  {/if}
+  
+  <h4>{#totp_setup_secret_heading#}</h4>
+  <div class="secret_code_box" id="totp_secret_print_area">
+    <h1 style="text-align: center; font-family: 'Courier New', Courier, monospace; letter-spacing: 0.5cap; font-weight: bold;">{$totp_secret}</h1>
+    <p style="text-align: center;">
+      {#totp_setup_secret_info#}
+    </p>
+  </div>
+
+  <div class="action_buttons">
+    {if $tcpdf_available}
+    <a href="{$link_download_totp_secret_pdf}" class="cssButton primary" target="_blank" rel="noopener">
+      <span class="cssButtonIcon"><i class="fas fa-file-pdf"></i></span>
+      <span class="cssButtonText">{#totp_secret_download_pdf#}</span>
+    </a>
+    {/if}
+  </div>
+
+  <h4>{#totp_setup_step2#}</h4>
+  {$form_action_enable}
+  <input type="hidden" name="method" value="totp">
+  <input type="hidden" name="totp_secret" value="{$totp_secret}"> 
+  <div class="secret_code_box">
+    <p style="text-align: center;">{#totp_setup_enter_code#}</p>
+
+      <div style="text-align: center;">
+        <label for="totp_code_1" style="display: block; margin-bottom: 15px; font-size: 16px; font-weight: bold;">{#email_setup_label#}</label>
+        <div class="six_digit_input_totp" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+          <input type="text" class="digit_input_totp" id="totp_code_1" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+          <input type="text" class="digit_input_totp" id="totp_code_2" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+          <input type="text" class="digit_input_totp" id="totp_code_3" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+          <input type="text" class="digit_input_totp" id="totp_code_4" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+          <input type="text" class="digit_input_totp" id="totp_code_5" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+          <input type="text" class="digit_input_totp" id="totp_code_6" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+        </div>
+        <input type="hidden" name="totp_code" id="totp_code">
+      </div>
+
+  </div> <!-- End secret_code_box -->
+  <div class="action_buttons">
+    <button type="submit" class="cssButton color_success">
+      <span class="cssButtonIcon"><i class="fas fa-check"></i></span>
+      <span class="cssButtonText">{#totp_setup_activate#}</span>
+    </button>
+    <a href="{$link_cancel_email_setup}" class="cssButton color_danger">
+      <span class="cssButtonIcon"><i class="fas fa-times"></i></span>
+      <span class="cssButtonText">{#two_factor_cancel_method#}</span>
+    </a>
+  </div>
+  {$form_end}
+
+</div> <!-- End highlightbox last -->
+
+{* ===== EMAIL VERIFICATION DURING SETUP ===== *}
+{elseif $email_setup_pending}
+    <div class="highlightbox cf">
+      <h4><i class="fas fa-envelope"></i> {#email_setup_heading#}</h4>
+      <p>{#email_setup_code_sent#|sprintf:$customer_email}</p>
+      <p>{#email_setup_enter_code#}</p>
+      
+      {$form_action_verify_email}
+        <div class="code_input_box" style="text-align: center;">
+          <label for="email_code_1" style="display: block; margin-bottom: 15px; font-size: 16px; font-weight: bold;">{#email_setup_label#}</label>
+          <div class="six_digit_input" style="display: flex; justify-content: center; gap: 10px;">
+            <input type="text" class="digit_input" id="email_code_1" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_2" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_3" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_4" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_5" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_6" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+          </div>
+          <input type="hidden" name="email_code" id="email_code">
+        </div>
+       
+        <div class="action_buttons">
+          <button type="submit" class="cssButton color_success">
+            <span class="cssButtonIcon"><i class="fas fa-check"></i></span>
+            <span class="cssButtonText">{#email_setup_confirm#}</span>
+          </button>
+          <a href="{$link_cancel_email_setup}" class="cssButton color_danger">
+            <span class="cssButtonIcon"><i class="fas fa-times"></i></span>
+            <span class="cssButtonText">{#two_factor_cancel_method#}</span>
+          </a>
+        </div>
+      {$form_end}
+      
+      <div class="infomessage" style="margin-top: 20px;">
+        <strong>{#email_setup_note#}</strong> {#email_setup_valid_time#}
+      </div>
+    </div>
+
+{* ===== 2FA ENABLED - MANAGEMENT VIEW ===== *}
+{elseif $two_factor_enabled}
+<div class="highlightbox checkoutborder cf">
+  <h2 style="margin-top: 0;"><i class="fas fa-shield-alt"></i> {#two_factor_enabled_title#}</h2>
+  <p>
+    <strong>{#two_factor_active_method#}</strong> 
+    {if $current_method == 'totp'}
+      <span class="method_badge totp">
+        <i class="fas fa-mobile-alt"></i> {#method_badge_totp#}
+      </span>
+    {elseif $current_method == 'email'}
+      <span class="method_badge email">
+        <i class="fas fa-envelope"></i> {#method_badge_email#}
+      </span>
+    {/if}
+  </p>
+</div>
+
+<div class="highlightbox cf">
+  {* Backup Codes Status *}
+  <h2><i class="fas fa-cogs"></i> {#settings_heading#}</h2>
+  <h4><i class="fas fa-life-ring"></i> {#backup_codes_status_heading#}</h4>
+  <p>{#backup_codes_remaining#|sprintf:$remaining_backup_codes}</p>
+  {if $remaining_backup_codes < 3}
+  <div class="infomessage">
+    <i class="fas fa-exclamation-triangle"></i> {#backup_codes_low_warning#}
+  </div>
+  {/if}
+  
+  {$form_action_regenerate}
+  <div class="action_buttons">
+    <button type="submit" class="cssButton primary" onclick="return confirm('{#backup_codes_regenerate_confirm#}');">
+      <span class="cssButtonIcon"><i class="fas fa-sync"></i></span>
+      <span class="cssButtonText">{#backup_codes_regenerate#}</span>
+    </button>
+  </div>
+  {$form_end}
+
+  {* Change Method *}
+  <h4><i class="fas fa-redo"></i> {#settings_change_method#}</h4>
+  <p>{#settings_change_method_info#}</p>
+  {$form_action_change}
+  {if $current_method == 'totp'}
+    <input type="hidden" name="new_method" value="email">
+    <div class="action_buttons">
+      <button type="submit" class="cssButton primary">
+        <span class="cssButtonIcon"><i class="fas fa-envelope"></i></span>
+        <span class="cssButtonText">{#settings_switch_to_email#}</span>
+      </button>
+    </div>  
+    {elseif $current_method == 'email'}
+    <input type="hidden" name="new_method" value="totp">
+    <div class="action_buttons">
+      <button type="submit" class="cssButton primary">
+        <span class="cssButtonIcon"><i class="fas fa-mobile-alt"></i></span>
+        <span class="cssButtonText">{#settings_switch_to_totp#}</span>
+      </button>
+    </div>  
+    {/if}
+  {$form_end}
+</div>
+
+{* Disable 2FA *}
+<div class="highlightbox cf">
+  <h4><i class="fas fa-life-ring"></i> {#settings_disable_2fa#}</h4>
+  <p>{#settings_disable_warning#}</p>
+  {$form_action_disable}
+  <input type="hidden" name="confirm_disable" value="yes">
+  <div class="action_buttons">
+    <button type="submit" class="cssButton primary" onclick="return confirm('{#settings_disable_confirm#}');">
+      <span class="cssButtonIcon"><i class="fas fa-times-circle"></i></span>
+      <span class="cssButtonText">{#settings_disable_button#}</span>
+    </button>
+  </div>
+  {$form_end}
+</div>
+
+{* ===== EMAIL VERIFICATION DURING SETUP ===== *}
+{elseif $email_setup_pending}
+    <div class="highlightbox cf">
+      <h4><i class="fas fa-envelope"></i> {#email_setup_heading#}</h4>
+      <p>{#email_setup_code_sent#|sprintf:$customer_email}</p>
+      <p>{#email_setup_enter_code#}</p>
+      
+      {$form_action_verify_email}
+        <div class="code_input_box" style="text-align: center;">
+          <label for="email_code_1" style="display: block; margin-bottom: 15px; font-size: 16px; font-weight: bold;">{#email_setup_label#}</label>
+          <div class="six_digit_input" style="display: flex; justify-content: center; gap: 10px;">
+            <input type="text" class="digit_input" id="email_code_1" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_2" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_3" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_4" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_5" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_6" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+          </div>
+          <input type="hidden" name="email_code" id="email_code">
+        </div>
+       
+        <div class="action_buttons">
+          <button type="submit" class="cssButton color_success">
+            <span class="cssButtonIcon"><i class="fas fa-check"></i></span>
+            <span class="cssButtonText">{#email_setup_confirm#}</span>
+          </button>
+          <a href="{$link_cancel_email_setup}" class="cssButton color_danger">
+            <span class="cssButtonIcon"><i class="fas fa-times"></i></span>
+            <span class="cssButtonText">{#two_factor_cancel_method#}</span>
+          </a>
+        </div>
+      {$form_end}
+      
+      <div class="infomessage" style="margin-top: 20px;">
+        <strong>{#email_setup_note#}</strong> {#email_setup_valid_time#}
+      </div>
+    </div>
+
+{* ===== 2FA ENABLED - MANAGEMENT VIEW ===== *}
+{else}
+  <div class="highlightbox">
+    <h4>{#what_is_2fa_heading#}</h4>
+    <p>{#what_is_2fa_description#}</p>
+    <p><strong>{#what_is_2fa_advantages#}</strong></p>
+    <ul style="margin-left: 20px;">
+      <li>{#what_is_2fa_benefit1#}</li>
+      <li>{#what_is_2fa_benefit2#}</li>
+      <li>{#what_is_2fa_benefit3#}</li>
+    </ul>
+  </div> <!-- End highlightbox -->
+  <br class="clearfix">
+
+  <h4>{#choose_method_heading#}</h4>
+  <div class="twoColumsInner">
+    {* TOTP Method *}
+    <div class="highlightbox grey" style="overflow: auto;">
+      <p><strong><i class="fas fa-mobile-alt"></i> {#method_totp_title#}</strong> <span class="method_badge recommended">{#method_recommended#}</span></p>
+      <div class="twoColumsInner">
+        <p><strong>{#totp_method_advantages#}</strong></p>
+        <ul>
+          <li>{#totp_method_benefit1#}</li>
+          <li>{#totp_method_benefit2#}</li>
+          <li>{#totp_method_benefit3#}</li>
+          <li>{#totp_method_benefit4#}</li>
+        </ul>
+      </div>
+
+      <div class="twoColumsInner last">
+        <p><strong>{#totp_method_requires#}</strong></p>
+        <p>{#totp_method_app_info#}</p>
+        <ul>
+          <li><a href="https://support.google.com/accounts/answer/1066447" target="_blank" rel="noopener">Google Authenticator</a></li>
+          <li><a href="https://www.microsoft.com/de-de/security/mobile-authenticator-app" target="_blank" rel="noopener">Microsoft Authenticator</a></li>
+          <li><a href="https://authy.com/download/" target="_blank" rel="noopener">Authy</a></li>
+          <li><a href="https://1password.com/downloads/" target="_blank" rel="noopener">1Password</a></li>
+        </ul>
+      </div>      
+      <br class="clearfix">
+      <h4 style="height: 1px;">&nbsp;</h4>
+      <div class="action_buttons">
+        <a href="{$link_setup_totp}" class="cssButton primary">
+          <span class="cssButtonIcon"><i class="fas fa-mobile-alt"></i></span>
+          <span class="cssButtonText">{#totp_method_setup_button#}</span>
+        </a>
+      </div>
+    </div> <!-- End highlightbox -->
+  </div> <!-- End twoColumsInner -->
+  
+  <div class="twoColumsInner last">
+    <div class="highlightbox grey">
+      <p><strong><i class="fas fa-envelope-open-text"></i> {#method_email_title#}</strong></p>
+
+      <div class="twoColumsInner">
+        <p><strong>{#email_method_advantages#}</strong></p>
+        <ul>
+          <li>{#email_method_benefit1#}</li>
+          <li>{#email_method_benefit2#}</li>
+          <li>{#email_method_benefit3#}</li>
+        </ul>
+      </div>
+
+      <div class="twoColumsInner last">
+        <p><strong>{#email_method_notes#}</strong></p>
+        <ul>
+          <li>{#email_method_note1#}</li>
+          <li>{#email_method_note2#}</li>
+          <li>{#email_method_note3#}</li>
+        </ul>
+      </div>
+      <br class="clearfix">      
+      <p><strong>{#email_method_address#} {$customer_email}</strong></p>
+      {$form_action_enable}
+      <input type="hidden" name="method" value="email">
+      <h4 style="height: 1px;">&nbsp;</h4>
+      <div class="action_buttons">
+        <button type="submit" class="cssButton primary">
+          <span class="cssButtonIcon"><i class="fas fa-envelope-open-text"></i></span>
+          <span class="cssButtonText">{#email_method_setup_button#}</span>
+        </button>
+      </div>
+      {$form_end}
+
+    </div>
+  </div> <!-- End twoColumsInner last -->
+  <br class="clearfix">    
+  <div class="infomessage">
+    <p><strong><i class="fas fa-key"></i> {#backup_codes_status_heading#}</strong></p>
+    <p>{#backup_codes_info_footer#}</p>
+    <p><strong>{#backup_codes_important#}</strong> {#backup_codes_save_important#}</p>
+  </div>
+  {/if}
+</div>

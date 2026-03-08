@@ -1,0 +1,202 @@
+{config_load file="$language/lang_$language.conf" section="account"}
+{config_load file="lang_bx_two_factor_`$language`.custom"}
+
+<div class="bx_two_factor_verify">
+  <h1>{#verify_page_heading#}</h1>
+  
+  {* Messages *}
+  {if $messages}
+    {foreach $messages as $message}
+      {if $message.type == 'error'}
+        <div class="errormessage">{$message.text}</div>
+      {elseif $message.type == 'success'}
+        <div class="successmessage">{$message.text}</div>
+      {elseif $message.type == 'warning'}
+        <div class="infomessage">{$message.text}</div>
+      {/if}
+    {/foreach}
+  {/if}
+  
+  {if $email_error}
+    <div class="errormessage">{$email_error}</div>
+  {/if}
+
+  <div class="flex_account_row">
+    <div class="flex_account_col_2">
+      <h2 style="text-align: center;">{#verify_greeting#|sprintf:$customer_salutation:$customer_lastname}</h2>
+      <p style="text-align: center;">{#two_factor_account_protected#}</p>
+
+      {* TOTP Method *}
+      {if $method == 'totp'}
+        <div class="contentbox">
+          {$form_action_verify}
+            <div class="code_input_box">
+              <label for="code">{#email_setup_label#}</label>
+              <input type="text" name="code" id="code" class="code_input" maxlength="6" placeholder="123456" required autofocus autocomplete="off">
+            </div>
+            
+            <div class="action_buttons">
+              <button type="submit" name="verify_code" class="cssButton color_success">
+                <span class="cssButtonIcon"><i class="fa-solid fa-check"></i></span>
+                <span class="cssButtonText">{#email_setup_confirm#}</span>
+              </button>
+            </div>
+          {$form_end}
+        </div>
+      {* Email Method *}
+      {elseif $method == 'email'}
+        <div class="status_box warning">
+          <h4><i class="fa-solid fa-envelope"></i> {#verify_email_code_heading#}</h4>
+          
+          {if $email_sent}
+            <div class="successmessage small">
+              {#verify_code_sent_email#|sprintf:$customer_email}
+            </div>
+            
+            {if $email_expires_in}
+              <p style="text-align: center; font-size: 14px; color: #666; margin-top: 15px;">
+                {#verify_code_valid_time#|sprintf:$email_expires_in}
+              </p>
+            {/if}
+          {else}
+            <div class="infomessage small">
+              {#verify_request_code#}
+            </div>
+            
+            <div style="text-align: center; margin: 20px 0;">
+              <a href="{$link_resend_email}" class="cssButton color_info">
+                <span class="cssButtonIcon"><i class="fa-solid fa-envelope"></i></span>
+                <span class="cssButtonText">{#verify_request_code_button#}</span>
+              </a>
+            </div>
+          {/if}
+        </div>
+        
+        {if $email_sent}
+          {$form_action_verify}
+            <div class="code_input_box">
+              <label for="code">{#email_setup_label#}</label>
+              <input type="text" name="code" id="code" class="code_input" maxlength="6" placeholder="123456" required autofocus autocomplete="off">
+            </div>
+            
+            <div class="action_buttons">
+              <button type="submit" name="verify_code" class="cssButton color_success">
+                <span class="cssButtonIcon"><i class="fa-solid fa-check"></i></span>
+                <span class="cssButtonText">{#email_setup_confirm#}</span>
+              </button>
+            </div>
+          {$form_end}
+          
+          <div style="text-align: center; margin-top: 20px;">
+            <p style="color: #666; font-size: 14px;">{#verify_code_not_received#}</p>
+            <a href="{$link_resend_email}" class="cssButton">
+              <span class="cssButtonIcon"><i class="fa-solid fa-refresh"></i></span>
+              <span class="cssButtonText">{#verify_resend_code_button#}</span>
+            </a>
+          </div>
+        {/if}
+      {/if}
+      
+      {* Backup Code Option *}
+      <div class="contentbox">
+        <div class="backup_code_option">
+          <h4>{#verify_backup_alternative#}</h4>
+          <p style="text-align: center; color: #666;">{#verify_backup_no_access#}</p>
+          
+          <div style="text-align: center; margin: 20px 0;">
+            <button type="button" class="cssButton color_warning" onclick="document.getElementById('backup-code-form').style.display='block'; this.style.display='none';">
+              <span class="cssButtonIcon"><i class="fa-solid fa-key"></i></span>
+              <span class="cssButtonText">{#verify_backup_enter_button#}</span>
+            </button>
+          </div>
+          
+          <div id="backup-code-form" class="backup_code_form" style="display: none;">
+            {$form_action_verify}
+              <input type="hidden" name="use_backup" value="1">
+              
+              <div class="code_input_box">
+                <label for="backup_code">{#verify_backup_code_label#}</label>
+                <input type="text" name="code" id="backup_code" class="code_input" maxlength="9" placeholder="ABCD-1234" required autocomplete="off" style="text-transform: uppercase;">
+              </div>
+              
+              <div class="action_buttons">
+                <button type="submit" name="verify_code" class="cssButton color_warning">
+                  <span class="cssButtonIcon"><i class="fa-solid fa-key"></i></span>
+                  <span class="cssButtonText">{#verify_backup_use_button#}</span>
+                </button>
+              </div>
+            {$form_end}
+            
+            <div class="infomessage small" style="margin-top: 20px;">
+              <strong>{#email_setup_note#}</strong> {#verify_backup_single_use#}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- End flex_account_col_2 -->
+
+    <div class="flex_account_col_1" style="width: 380px; padding: 0 0 0 30px;">
+
+      {if $method == 'totp'}
+      <div class="status_box success">
+        <h4><i class="fa-solid fa-mobile"></i> {#verify_totp_info_heading#}</h4>
+        <p>{#verify_totp_info_text#}</p>
+        <ul style="margin-left: 20px;">
+          <li>Google Authenticator</li>
+          <li>Microsoft Authenticator</li>
+          <li>Authy</li>
+          <li>1Password</li>
+        </ul>
+      </div>
+      {/if}
+
+      {* Session Info & Cancel *}
+      <div class="contentbox">
+        <p style="margin: 0 0 15px 0;">
+          <i class="fa-solid fa-clock"></i> {#verify_session_expires#|sprintf:$session_expires_in}
+        </p>
+        <a href="{$link_cancel}" class="cssButton color_warning">
+          <span class="cssButtonIcon"><i class="fa-solid fa-times"></i></span>
+          <span class="cssButtonText">{#verify_cancel_button#}</span>
+        </a>
+      </div>
+
+    </div> <!-- End flex_account_col_1 -->
+  </div>
+
+ 
+</div>
+<div id="timer-data" data-email-expires="{$email_expires_in|default:0}" data-session-expires="{$session_expires_in}" data-cancel-url="{$link_cancel}" style="display: none;"></div>
+
+<script>
+var timerData = document.getElementById('timer-data');
+var emailExpires = parseInt(timerData.dataset.emailExpires) || 0;
+var sessionExpires = parseInt(timerData.dataset.sessionExpires);
+var cancelUrl = timerData.dataset.cancelUrl;
+
+if (emailExpires > 0) {
+  var emailTimer = setInterval(function() {
+    emailExpires--;
+    if (emailExpires <= 0) {
+      clearInterval(emailTimer);
+      var emailTimerEl = document.getElementById('email-timer');
+      if (emailTimerEl) emailTimerEl.textContent = '0';
+    } else {
+      var emailTimerEl = document.getElementById('email-timer');
+      if (emailTimerEl) emailTimerEl.textContent = emailExpires;
+    }
+  }, 1000);
+}
+
+var sessionTimer = setInterval(function() {
+  sessionExpires--;
+  if (sessionExpires <= 0) {
+    clearInterval(sessionTimer);
+    window.location.href = cancelUrl;
+  } else {
+    var sessionTimerEl = document.getElementById('session-timer');
+    if (sessionTimerEl) sessionTimerEl.textContent = sessionExpires;
+  }
+}, 1000);
+</script>

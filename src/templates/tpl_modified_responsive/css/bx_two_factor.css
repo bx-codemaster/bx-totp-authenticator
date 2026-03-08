@@ -1,0 +1,370 @@
+/* -----------------------------------------------------------------------------------------
+   Two-Factor Authentication Module - Custom Styles
+   tpl_modified_responsive
+   ---------------------------------------------------------------------------------------*/
+.highlightbox h4 {
+  margin: 30px 0px 5px 0px
+}
+
+/* Badge Styles */
+.totp_recommended {
+  display: inline-block;
+  background: linear-gradient(135deg, #b0377e 0%, #7c2759 100%);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 12px;
+  margin-left: 8px;
+  vertical-align: middle;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(124, 39, 89, 0.3);
+  position: relative;
+  top: -1px;
+}
+
+.method_badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  margin-left: 8px;
+  vertical-align: middle;
+  letter-spacing: 0.3px;
+}
+
+.method_badge.recommended {
+  background: linear-gradient(135deg, #b0377e 0%, #7c2759 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(124, 39, 89, 0.3);
+}
+
+.method_badge.totp {
+  background-color: #eee5ea;
+  color: #7c2759;
+  border: 1px solid #b0377e;
+}
+
+.method_badge.email {
+  background-color: #e8f4f8;
+  color: #3498db;
+  border: 1px solid #3498db;
+}
+
+/* Code Box Styles */
+.secret_code_box {
+  background: #f8f9fa;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  padding: 25px;
+  margin: 20px 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.code_input_box {
+  background: #f8f9fa;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  padding: 25px;
+  margin: 20px 0;
+}
+
+.qr_code_box {
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 280px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.qr_code_box img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Button Styles */
+.action_buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.action_buttons .cssButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: auto;
+}
+
+.action_buttons .cssButton.color_success {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+}
+
+.action_buttons .cssButton.color_success:hover {
+  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.4);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.action_buttons .cssButton.color_danger {
+  background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(244, 67, 54, 0.3);
+}
+
+.action_buttons .cssButton.color_danger:hover {
+  background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+  box-shadow: 0 4px 8px rgba(244, 67, 54, 0.4);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.action_buttons .cssButton.color_info {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+}
+
+.action_buttons .cssButton.color_info:hover {
+  background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
+  box-shadow: 0 4px 8px rgba(52, 152, 219, 0.4);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.action_buttons .cssButton.primary {
+  background: linear-gradient(135deg, #AF417E 0%, #8d3465 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(175, 65, 126, 0.3);
+}
+
+.action_buttons .cssButton.primary:hover {
+  background: linear-gradient(135deg, #8d3465 0%, #7c2759 100%);
+  box-shadow: 0 4px 8px rgba(175, 65, 126, 0.4);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.action_buttons .cssButtonIcon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.action_buttons .cssButtonText {
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .action_buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .action_buttons .cssButton {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+.backup_codes_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+  padding: 0;
+}
+
+.backup_code_item {
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px 20px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 2px;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.backup_code_item:hover {
+  border-color: #7c2759;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.digit_input_totp {
+  width: 50px !important;
+  height: 60px !important;
+  font-size: 28px;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 8px !important;
+  font-weight: bold;
+  transition: border-color 0.3s;
+}
+.digit_input_totp:focus {
+  border-color: #4CAF50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+@media (max-width: 600px) {
+  .digit_input_totp {
+    width: 40px !important;
+    height: 50px !important;
+    font-size: 24px;
+  }
+}
+
+.digit_input {
+  width: 50px !important;
+  height: 60px !important;
+  font-size: 28px;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 8px !important;
+  font-weight: bold;
+  transition: border-color 0.3s;
+}
+.digit_input:focus {
+  border-color: #4CAF50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+@media (max-width: 600px) {
+  .digit_input {
+    width: 40px !important;
+    height: 50px !important;
+    font-size: 24px;
+  }
+}
+@media (max-width: 768px) {
+  .backup_codes_grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -----------------------------------------------------------------------------------------
+   Message Styles for Two-Factor Authentication
+   ---------------------------------------------------------------------------------------*/
+
+/* Error Message */
+.error_message {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+  border-left: 5px solid #e74c3c;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  color: #c0392b;
+  font-size: 14px;
+  line-height: 1.6;
+  box-shadow: 0 2px 6px rgba(231, 76, 60, 0.15);
+}
+
+.error_message a {
+  color: #c0392b;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.error_message a:hover {
+  color: #a93226;
+}
+
+/* Success Message */
+.success_message {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-left: 5px solid #22c55e;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  color: #166534;
+  font-size: 14px;
+  line-height: 1.6;
+  box-shadow: 0 2px 6px rgba(34, 197, 94, 0.15);
+}
+
+.success_message a {
+  color: #166534;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.success_message a:hover {
+  color: #14532d;
+}
+
+/* Info/Warning Message */
+.info_message {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-left: 5px solid #f59e0b;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  color: #92400e;
+  font-size: 14px;
+  line-height: 1.6;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);
+}
+
+.info_message a {
+  color: #92400e;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.info_message a:hover {
+  color: #78350f;
+}
+
+/* Small variant for compact spaces */
+.error_message.small,
+.success_message.small,
+.info_message.small {
+  padding: 12px 16px;
+  font-size: 13px;
+  margin: 15px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .error_message,
+  .success_message,
+  .info_message {
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+  
+  .error_message::before,
+  .success_message::before,
+  .info_message::before {
+    font-size: 18px;
+  }
+}

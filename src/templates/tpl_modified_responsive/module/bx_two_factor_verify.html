@@ -1,0 +1,168 @@
+{config_load file="$language/lang_$language.conf" section="account"}
+{config_load file="lang_bx_two_factor_`$language`.custom"}
+
+<h1>{#verify_page_heading#}</h1>
+  
+{* Messages *}
+{if $messages}
+  {foreach $messages as $message}
+    {if $message.type == 'error'}
+      <div class="error_message">{$message.text}</div>
+    {elseif $message.type == 'success'}
+      <div class="success_message">{$message.text}</div>
+    {elseif $message.type == 'warning'}
+      <div class="info_message">{$message.text}</div>
+    {/if}
+  {/foreach}
+{/if}
+
+{if $email_error}
+  <div class="error_message">{$email_error}</div>
+{/if}
+
+<div class="highlightbox cf" style="margin-top: 0; padding-top: 0;">
+  <h4><i class="fas fa-user-shield"></i> {#verify_greeting#|sprintf:$customer_salutation:$customer_lastname}</h4>
+  <p>{#two_factor_account_protected#}</p>
+</div>
+
+<div class="highlightbox cf">
+  {* TOTP Method *}
+  {if $method == 'totp'}
+
+    <h4><i class="fas fa-shield-halved"></i> {#verify_totp_info_heading#}</h4>
+    {$form_action_verify}
+    <div class="code_input_box" style="text-align: center;">
+      <div class="six_digit_input_totp" style="display: flex; justify-content: center; gap: 10px;">
+        <input type="text" class="digit_input_totp" id="totp_code_1" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+        <input type="text" class="digit_input_totp" id="totp_code_2" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+        <input type="text" class="digit_input_totp" id="totp_code_3" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+        <input type="text" class="digit_input_totp" id="totp_code_4" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+        <input type="text" class="digit_input_totp" id="totp_code_5" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+        <input type="text" class="digit_input_totp" id="totp_code_6" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+      </div>
+      <input type="hidden" name="code" id="totp_code">
+    </div>
+    
+    <div class="action_buttons">
+      <button type="submit" name="verify_code" class="cssButton color_success">
+        <span class="cssButtonIcon"><i class="fas fa-check"></i></span>
+        <span class="cssButtonText">{#email_setup_confirm#}</span>
+      </button>
+    </div>
+    {$form_end}
+
+  {* Email Method *}
+  {elseif $method == 'email'}
+    <h4><i class="fas fa-envelope"></i> {#verify_email_info_heading#}</h4>      
+    {if $email_sent}
+      <div class="info_message">{#email_setup_code_sent#|sprintf:$customer_email}</div>
+      {if $email_expires_in}
+        <div class="success_message" style="text-align: center;">{#verify_code_valid_time#|sprintf:$email_expires_in}</div>
+      {/if}
+    {else}
+      <div class="info_message">{#verify_request_code#}</div>
+      <div class="action_buttons">
+        <a href="{$link_resend_email}" class="cssButton primary">
+          <span class="cssButtonIcon"><i class="fas fa-envelope"></i></span>
+          <span class="cssButtonText">{#verify_request_code_button#}</span>
+        </a>
+      </div>
+    {/if}
+      
+    {if $email_sent}
+      <h4><i class="fas fa-keyboard"></i> {#email_setup_heading#}</h4>
+      {$form_action_verify}
+        <div class="code_input_box" style="text-align: center;">
+          <label for="email_code_1"><strong>{#email_setup_label#}</strong></label>
+          <div class="six_digit_input" style="display: flex; justify-content: center; gap: 10px;">
+            <input type="text" class="digit_input" id="email_code_1" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_2" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_3" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_4" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_5" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+            <input type="text" class="digit_input" id="email_code_6" maxlength="1" pattern="[0-9]" autocomplete="off" required>
+          </div>
+          <input type="hidden" name="code" id="email_code">
+        </div>
+        
+        <div class="action_buttons">
+          <button type="submit" name="verify_code" class="cssButton color_success">
+            <span class="cssButtonIcon"><i class="fas fa-check"></i></span>
+            <span class="cssButtonText">{#email_setup_confirm#}</span>
+          </button>
+        </div>
+      {$form_end}
+      <h4><i class="fas fa-redo"></i> {#verify_code_not_received#}</h4>
+      <div class="action_buttons">
+        <a href="{$link_resend_email}" class="cssButton primary">
+          <span class="cssButtonIcon"><i class="fas fa-envelope"></i></span>
+          <span class="cssButtonText">{#verify_resend_code_button#}</span>
+        </a>
+      </div>
+    {/if}
+
+  {/if}
+</div>
+
+<div class="highlightbox cf">
+  <h4><i class="fas fa-life-ring"></i> {#verify_backup_alternative#}</h4>
+  <p>{#verify_backup_no_access#}</p>
+  <div class="action_buttons">
+    <button type="button" class="cssButton color_info" onclick="document.getElementById('backup-code-form').style.display='block'; this.style.display='none';">
+      <span class="cssButtonIcon"><i class="fas fa-key"></i></span>
+      <span class="cssButtonText">{#verify_backup_enter_button#}</span>
+    </button>
+  </div>
+
+  <div id="backup-code-form" class="backup_code_form" style="display: none;">
+    {$form_action_verify}
+    <input type="hidden" name="use_backup" value="1">
+    
+    <div class="code_input_box">
+      <label for="backup_code">{#verify_backup_code_label#}</label>
+      <input type="text" name="code" id="backup_code" class="code_input" maxlength="9" placeholder="ABCD-1234" required autocomplete="off" style="text-transform: uppercase;">
+    </div>
+    
+    <div class="action_buttons">
+      <button type="submit" name="verify_code" class="cssButton color_info">
+        <span class="cssButtonIcon"><i class="fas fa-key"></i></span>
+        <span class="cssButtonText">{#verify_backup_use_button#}</span>
+      </button>
+    </div>
+    {$form_end}
+  
+    <div class="info_message" style="margin-top: 20px;">
+      <strong>{#email_setup_note#}</strong> {#verify_backup_single_use#}
+    </div>
+  </div>
+</div>
+
+{if $method == 'totp'}
+<div class="highlightbox cf">
+  <div class="color_success">
+    <h4><i class="fas fa-shield-halved"></i> {#verify_totp_info_heading#}</h4>
+    <p>{#verify_totp_info_text#}</p>
+    <ul style="margin-left: 20px;">
+      <li>Google Authenticator</li>
+      <li>Microsoft Authenticator</li>
+      <li>Authy</li>
+      <li>1Password</li>
+    </ul>
+  </div>
+</div>
+{/if}
+
+<div class="highlightbox cf">
+  {* Session Info & Cancel *}
+  <div class="color_danger">
+    <p><i class="fas fa-clock"></i> {#verify_session_expires#|sprintf:$session_expires_in}</p>    
+  </div>
+  <div class="action_buttons">
+    <a href="{$link_cancel}" class="cssButton color_danger">
+      <span class="cssButtonIcon"><i class="fas fa-times"></i></span>
+      <span class="cssButtonText">{#verify_cancel_button#}</span>
+    </a>
+  </div>
+</div>
+
+<div id="timer-data" data-email-expires="{$email_expires_in|default:0}" data-session-expires="{$session_expires_in}" data-cancel-url="{$link_cancel}" style="display: none;"></div>

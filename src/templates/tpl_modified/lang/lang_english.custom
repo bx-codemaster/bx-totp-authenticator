@@ -1,0 +1,49 @@
+zoomtext = 'For a larger view click on the thumbnail'
+products_desc = 'Products description'
+products_fsk18_check = 'This article can be purchased only after age verification.'
+products_manufacturer_model = 'MPN:'
+products_tags = 'Features'
+heading_products_tags = 'Product Features'
+
+first = '&laquo; first'
+back = '&laquo; back'
+overview = 'Overview'
+next = 'next &raquo;'
+last = 'last &raquo;'
+
+heading_miscellaneous = 'Payment methods'
+text_miscellaneous = 'Die Box kann unter tpl_modified/boxes/box_miscellaneous.html ver&auml;ndert werden. Die Sprachvariablen befinden sich in der Datei tpl_modified/lang/german/lang_german.custom.'
+
+ab_admin = 'Adminarea'
+ab_orders = 'Orders'
+ab_contentmanager = 'Content Manager'
+ab_customers = 'Customers'
+ab_category = 'Category/Products'
+ab_logoff = 'Logoff'
+ab_news = 'News'
+ab_offline = 'Shop Offline'
+ab_update = 'Update'
+ab_support = 'Support'
+ab_shop = 'Shop'
+ab_caching = 'Caching'
+
+ab_edit_content = 'Edit Content'
+ab_edit_manufacturer = 'Edit Manufacturer'
+ab_edit_product = 'Edit Product'
+ab_edit_attributes = 'Edit Product Attributes'
+ab_edit_category = 'Edit Category'
+ab_edit_xsell = 'Edit Cross Selling'
+ab_edit_tags = 'Product Features'
+
+info_reviews = 'Reviews:'
+info_review = 'Review:'
+
+heading_trustedshops = 'Trusted Shops'
+
+text_search_again = 'Sorry, we could not find a product matching your search request'
+
+listing_listview = 'List view'
+listing_boxview = 'Box view'
+products_flag_new = 'New'
+
+title_nav_two_factor_auth = 'Two-factor authentication'

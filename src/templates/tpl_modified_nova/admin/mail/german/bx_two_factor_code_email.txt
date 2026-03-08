@@ -1,0 +1,31 @@
+===============================================
+  ZWEI-FAKTOR-AUTHENTIFIZIERUNG
+===============================================
+
+Sehr geehrte{if $customer_gender == 'f'} Frau{elseif $customer_gender == 'm'}r Herr{else}r/e{/if} {$customer_name},
+
+Sie haben einen Sicherheitscode für die Zwei-Faktor-Authentifizierung bei {$shop_name} angefordert.
+
+
+IHR SICHERHEITSCODE:
+
+    {$code}
+
+Gültig für {$validity_minutes} Minuten
+
+
+Geben Sie diesen Code auf der Anmeldeseite ein, um den Login-Vorgang abzuschließen.
+
+
+⚠ SICHERHEITSHINWEIS:
+Falls Sie diesen Code nicht angefordert haben, ignorieren Sie diese E-Mail bitte und ändern Sie zur Sicherheit Ihr Passwort.
+
+
+Mit freundlichen Grüßen
+Ihr {$shop_name} Team
+
+===============================================
+Diese E-Mail wurde automatisch generiert.
+Bitte antworten Sie nicht direkt auf diese Nachricht.
+© {$smarty.now|date_format:"%Y"} {$shop_name}. Alle Rechte vorbehalten.
+===============================================

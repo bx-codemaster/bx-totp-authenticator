@@ -1,0 +1,586 @@
+/* BX Two-Factor Authentication Styles */
+
+ul.list_highlightbox {
+  list-style-type: none !important;
+  margin-left: 0 !important;
+}
+
+.bx_two_factor_account,
+.bx_two_factor_verify {
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* Links in app lists */
+.bx_two_factor_account ul li a,
+.bx_two_factor_verify ul li a {
+  color: #0066cc;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.bx_two_factor_account ul li a:hover,
+.bx_two_factor_verify ul li a:hover {
+  color: #004080;
+  text-decoration: underline;
+}
+
+/* Title */
+.bx_two_factor_account h1.title,
+.bx_two_factor_verify h1.title {
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 30px 0;
+  padding: 0;
+}
+
+/* Contentbox styling */
+.bx_two_factor_account .contentbox,
+.bx_two_factor_verify .contentbox {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.bx_two_factor_account .contentbox.grey {
+  background: #f8f9fa;
+}
+
+.bx_two_factor_account .contentbox.lightyellow {
+  background: #fff9e6;
+  border-color: #ffc107;
+}
+
+.bx_two_factor_account .contentbox.success {
+  background: #e1f6e9;
+  border-color: #43c875;
+}
+
+/* Subline (section headings) */
+.bx_two_factor_account .subline {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 15px 0;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Method badges */
+.method_badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: #fff;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.method_badge.totp {
+  background: #4CAF50;
+}
+
+.method_badge.email {
+  background: #FF9800;
+}
+
+.method_badge.recommended {
+  background: #28a745;
+}
+
+/* Status boxes */
+.status_box {
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.status_box.success {
+  background: #e1f6e9;
+  border: 1px solid #43c875;
+  color: #155724;
+}
+
+.status_box.warning {
+  background: #fff9e6;
+  border: 1px solid #ffc107;
+  color: #856404;
+}
+
+.status_box.info {
+  background: #eaf2fa;
+  border: 1px solid #296aab;
+  color: #296aab;
+}
+
+/* Two column layout */
+.two_column_row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.two_column_item {
+  flex: 1;
+  min-width: 280px;
+}
+
+@media only screen and (max-width: 758px) {
+  .two_column_item {
+    flex: 100%;
+  }
+}
+
+/* Method selection cards */
+.method_card {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 25px;
+  height: 100%;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.method_card:hover {
+  border-color: #296aab;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.method_card.recommended {
+  border-color: #4CAF50;
+}
+
+.method_card .method_title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.method_card .method_title .fa-solid {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.method_card .method_content {
+  flex: 1;
+}
+
+.method_card .method_actions {
+  margin-top: 20px;
+}
+
+.method_card ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.method_card ul li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.method_card ul li:last-child {
+  border-bottom: none;
+}
+
+/* QR Code display */
+.qr_code_box {
+  text-align: center;
+  padding: 30px;
+  background: #fff;
+  border: 2px dashed #e0e0e0;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.qr_code_box img {
+  max-width: 250px;
+  height: auto;
+  border: 1px solid #e0e0e0;
+  padding: 5px;
+  background: #fff;
+}
+
+/* Secret code display */
+.secret_code_box {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 0;
+}
+
+.secret_code {
+  font-family: 'Courier New', monospace;
+  font-size: 20px;
+  background: #fff;
+  padding: 15px;
+  display: block;
+  text-align: center;
+  letter-spacing: 4px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  word-break: break-all;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Code input */
+.code_input_box {
+  text-align: center;
+  margin: 0;
+}
+
+.code_input_box label {
+  display: block;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.code_input {
+  font-size: 32px !important;
+  text-align: center !important;
+  letter-spacing: 12px !important;
+  max-width: 400px !important;
+  margin: 0 auto !important;
+  padding: 20px !important;
+  font-family: 'Courier New', monospace !important;
+  font-weight: 600 !important;
+  border: 2px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+}
+
+.code_input:focus {
+  border-color: #296aab !important;
+  outline: none !important;
+}
+
+/* Backup codes display */
+.backup_codes_box {
+  background: #fff9e6;
+  border: 2px solid #ffc107;
+  border-radius: 8px;
+  padding: 30px;
+  margin: 0;
+}
+
+.backup_codes_box h3 {
+  color: #856404;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* Backup Codes Grid Layout */
+.backup_codes_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.backup_code_item {
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 15px;
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.backup_code_item:hover {
+  background: #e9ecef;
+  border-color: #0066cc;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Legacy backup_codes_list (fallback) */
+.backup_codes_list {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 20px 0;
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+}
+
+.backup_codes_list div {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: center;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.backup_codes_list div:last-child {
+  border-bottom: none;
+}
+
+
+.backup_code_option h4 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.backup_code_form {
+  margin-top: 20px;
+}
+
+/* Security icon */
+.security_icon {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 60px;
+  color: #296aab;
+}
+
+/* Timer display */
+.timer_box {
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.timer_box .fa-clock {
+  margin-right: 8px;
+}
+
+.timer_value {
+  font-weight: 700;
+  font-size: 18px;
+  color: #333;
+}
+
+/* Button Styles */
+.cssButton {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cssButton:hover {
+  background: #0056b3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.cssButton:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Color Variants */
+.cssButton.cssButtonColor1,
+.cssButton.color_primary {
+  background:#af417e;
+  color: #efefef;
+}
+
+.cssButton.cssButtonColor1:hover,
+.cssButton.color_primary:hover {
+  background: #8c3365;
+  color: #fff;
+  text-decoration: none;
+}
+
+.cssButton.cssButtonColor2,
+.cssButton.color_secondary {
+  background: #6c757d;
+}
+
+.cssButton.cssButtonColor2:hover,
+.cssButton.color_secondary:hover {
+  background: #545b62;
+}
+
+.cssButton.cssButtonColor3,
+.cssButton.color_success {
+  background: #28a745;
+}
+
+.cssButton.cssButtonColor3:hover,
+.cssButton.color_success:hover {
+  background: #218838;
+}
+
+.cssButton.cssButtonColor4,
+.cssButton.color_danger {
+  background: #dc3545;
+  color: #efefef;
+}
+
+.cssButton.cssButtonColor4:hover,
+.cssButton.color_danger:hover {
+  background: #c82333;
+  color: #fff;
+  text-decoration: none;
+}
+
+.cssButton.cssButtonColor5,
+.cssButton.color_warning {
+  background: #ffc107;
+  color: #333;
+}
+
+.cssButton.cssButtonColor5:hover,
+.cssButton.color_warning:hover {
+  background: #e0a800;
+  color: #333;
+}
+
+.cssButton.cssButtonColor6,
+.cssButton.color_info {
+  background: #17a2b8;
+}
+
+.cssButton.cssButtonColor6:hover,
+.cssButton.color_info:hover {
+  background: #138496;
+}
+
+.cssButton.cssButtonColor7,
+.cssButton.color_light {
+  background: #f8f9fa;
+  color: #333;
+  border: 1px solid #dee2e6;
+}
+
+.cssButton.cssButtonColor7:hover,
+.cssButton.color_light:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.cssButton.cssButtonColor8,
+.cssButton.color_dark {
+  background: #343a40;
+}
+
+.cssButton.cssButtonColor8:hover,
+.cssButton.color_dark:hover {
+  background: #23272b;
+}
+
+/* Button Text and Icon Styling */
+.cssButton .cssButtonText {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.cssButton .cssButtonIcon,
+.cssButton i {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.cssButton .cssButtonIcon {
+  margin-left: 8px;
+}
+
+/* Action buttons container */
+.action_buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.action_buttons .cssButton {
+  margin: 5px;
+}
+
+/* Settings sections */
+.settings_section {
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.settings_section h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.settings_section.danger {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+}
+
+/* Print styles */
+@media print {
+  .backup_codes_box {
+    page-break-inside: avoid;
+  }
+  
+  .cssButton,
+  .action_buttons {
+    display: none;
+  }
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 500px) {
+  .code_input {
+    font-size: 24px !important;
+    letter-spacing: 8px !important;
+    padding: 15px !important;
+  }
+  
+  .secret_code {
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+  
+  /* Grid: 1 column on small screens */
+  .backup_codes_grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 15px;
+  }
+  
+  .backup_code_item {
+    font-size: 16px;
+    padding: 12px;
+  }
+  
+  .backup_codes_list {
+    font-size: 16px;
+  }
+}
