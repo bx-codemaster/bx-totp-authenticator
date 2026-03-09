@@ -44,6 +44,8 @@ try {
     // error_log('QR-Code library not available: ' . $e->getMessage());
 }
 
+
+
 // ========================================
 // POST-HANDLER: 2FA Notfall-Deaktivierung
 // ========================================

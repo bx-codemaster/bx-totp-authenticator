@@ -3,7 +3,7 @@
     "scopes": {
         "shop-root": {
             "hashes": {
-                "/admin/bx_totp_authenticator.php": "1554f3359ab2e30b328d07cdac024e48",
+                "/admin/bx_totp_authenticator.php": "c92eee5de1b2e24906c072b4bf0297b8",
                 "/admin/images/icons/heading/bx_2fa.png": "c9fd31c0e1b8562871c6bf611f4a8222",
                 "/admin/includes/classes/bx_totp_helper.php": "54914462ae85b46dfe6289f080a4dab4",
                 "/admin/includes/extra/css/bx_totp_authenticator.php": "8c81e603252f8c8bcad2114ece19abef",
