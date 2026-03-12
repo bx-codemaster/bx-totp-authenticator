@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: register_php_plugins.php 15235 2023-06-14 06:32:41Z GTB $
+   $Id: register_php_plugins.php 15292 2023-07-06 12:08:14Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -19,11 +19,11 @@
     'count',
     'nl2br',
     'sprintf',
+    'strtotime',
     'number_format',
     'stripslashes',
     'array_reverse',
     'xtc_href_link',
     'htmlentities',
-    'xtc_image_button', // needed for buttons
-    'xtc_image',        // needed for images
+    'xtc_date_short',
   );

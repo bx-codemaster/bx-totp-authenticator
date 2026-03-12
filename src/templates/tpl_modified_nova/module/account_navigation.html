@@ -35,6 +35,15 @@
         <span class="icon"><i class="fa-solid fa-cart-shopping"></i></span><span class="title">{#title_nav_orders#}</span>
       </a>
     </div>
+    
+    {if $smarty.const.MODULE_MODIFIED_RMA_STATUS && $smarty.const.MODULE_MODIFIED_RMA_STATUS == 'true'}
+    <?--// RMA Navigation Item //-->
+    <div class="navigation_item{if (strpos($smarty.server.PHP_SELF, $smarty.const.BX_FILENAME_RMA_OVERVIEW) !== false) || (strpos($smarty.server.PHP_SELF, $smarty.const.BX_FILENAME_RMA_OVERVIEW) !== false)} selected{/if}">
+      <a href="{$smarty.const.BX_FILENAME_RMA_OVERVIEW|xtc_href_link}" title="{#title_rma_overview#}">
+        <span class="icon"><i class="fa-solid fa-truck-fast"></i></span><span class="title">{#title_rma_overview#}</span>
+      </a>
+    </div>
+    {/if}
 
     {if $smarty.const.MODULE_BX_TOTP_AUTHENTICATOR_STATUS && $smarty.const.MODULE_BX_TOTP_AUTHENTICATOR_STATUS == 'True'}
     <!-- Start BX TWO FACTOR AUTH  -->

@@ -93,3 +93,6 @@ products_flag_new = 'Neu'
 
 # Two Factor Authenicator #
 title_nav_two_factor_auth = '2-Faktor-Authentifizierung'
+
+# BX RMA #
+title_rma_overview = 'Retouren'

@@ -1,7 +1,7 @@
 <?php
- defined('_VALID_XTC') or die('Direct Access to this location is not allowed.');
+  defined('_VALID_XTC') or die('Direct Access to this location is not allowed.');
 
- if (basename($_SERVER['PHP_SELF']) == 'bx_totp_authenticator.php') {
+  if ( defined('MODULE_BX_TOTP_AUTHENTICATOR_STATUS') && 'True' == MODULE_BX_TOTP_AUTHENTICATOR_STATUS  && basename($_SERVER['PHP_SELF']) == 'bx_totp_authenticator.php') {
 ?>
 <script>
 "use strict";

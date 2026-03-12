@@ -49,6 +49,16 @@
       <!-- End BX TWO FACTOR AUTH  -->
       {/if}
 
+      {if $smarty.const.MODULE_MODIFIED_RMA_STATUS && $smarty.const.MODULE_MODIFIED_RMA_STATUS == 'true'}
+      <!-- RMA -->
+      <li>
+        <a href="{$LINK_BX_RMA}" title="{#title_rma_overview#}">
+          <span class="icon"><i class="fa-solid fa-truck-fast"></i></span><span class="title">{#title_rma_overview#}</span>
+        </a>
+      </li>
+      <!-- END RMA -->
+      {/if}
+      
       {if isset($LINK_DELETE)}
         <li>
           <a href="{$LINK_DELETE}" title="{#title_nav_account_delete#}">
