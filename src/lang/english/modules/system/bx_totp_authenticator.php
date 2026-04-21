@@ -12,9 +12,9 @@
    -------------------------------------------------------*/
   define('MODULE_BX_TOTP_AUTHENTICATOR_TEXT_TITLE', 'BX TOTP Authenticator');  
   if(defined('MODULE_BX_TOTP_AUTHENTICATOR_STATUS') && MODULE_BX_TOTP_AUTHENTICATOR_STATUS == 'True') {
-    define('MODULE_BX_TOTP_AUTHENTICATOR_TEXT_DESCRIPTION', '<h3 style="margin-top: 0;">🔐 BX TOTP Authenticator</h3><p>Enables two-factor authentication - TOTP (Google/Microsoft/Authy Authenticator) to secure customer accounts</p>');
+    define('MODULE_BX_TOTP_AUTHENTICATOR_TEXT_DESCRIPTION', '<h3 style="margin-top:0; display:flex; align-items:center; gap:8px;">'.xtc_image(DIR_WS_ICONS.'heading/bx_2fa.png', 'BX TOTP Authenticator', '', '', 'style="max-height: 32px;"').' BX TOTP Authenticator</h3><p>Enables two-factor authentication - TOTP (Google/Microsoft/Authy Authenticator) to secure customer accounts</p>');
   } else {
-    define('MODULE_BX_TOTP_AUTHENTICATOR_TEXT_DESCRIPTION', '<h3 style="margin-top: 0;">🔐 BX TOTP Authenticator</h3>
+    define('MODULE_BX_TOTP_AUTHENTICATOR_TEXT_DESCRIPTION', '<h3 style="margin-top:0; display:flex; align-items:center; gap:8px;">'.xtc_image(DIR_WS_ICONS.'heading/bx_2fa.png', 'BX TOTP Authenticator', '', '', 'style="max-height: 32px;"').' BX TOTP Authenticator</h3>
     <p><a class="button btnbox but_red" style="text-align:center;" onclick="return confirmLink(\'Permanently delete all module files?\', \'\' ,this);" href="'.xtc_href_link(FILENAME_MODULE_EXPORT, 'set=system&module=bx_totp_authenticator&action=custom&delete=true').'">Permanently delete all module files</a></p>');
   }  
   define('MODULE_BX_TOTP_AUTHENTICATOR_SORT_ORDER_TITLE', 'sorting order');

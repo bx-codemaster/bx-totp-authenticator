@@ -58,8 +58,8 @@
                                                               ADD COLUMN two_factor_secret_created DATETIME DEFAULT '1000-01-01 00:00:00';");
 
       $freeId_query = xtc_db_query("SELECT (configuration_group_id+1) AS id 
-                                FROM " . TABLE_CONFIGURATION . " 
-                              WHERE (configuration_group_id+1) NOT IN (SELECT configuration_group_id FROM " . TABLE_CONFIGURATION . ") 
+                                FROM " . TABLE_CONFIGURATION_GROUP  . " 
+                              WHERE (configuration_group_id+1) NOT IN (SELECT configuration_group_id FROM " . TABLE_CONFIGURATION_GROUP  . ") 
                               LIMIT 1;"); 
       $freeId = xtc_db_fetch_array($freeId_query);
 

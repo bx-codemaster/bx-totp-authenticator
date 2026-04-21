@@ -480,7 +480,7 @@ if (($action === 'setup_totp' || $action === 'enable') && (false === $twoFactorE
 $emailSetupPending = isset($_SESSION['bx_2fa_email_setup']['pending']) && $_SESSION['bx_2fa_email_setup']['pending'];
 
 // Backup codes to display?
-$showBackupCodes = ($action === 'show_backup_codes' && isset($_SESSION['bx_2fa_backup_codes']));
+$showBackupCodes = ($action === 'view_backup_codes' && isset($_SESSION['bx_2fa_backup_codes']));
 $backupCodesToDisplay = $showBackupCodes ? $_SESSION['bx_2fa_backup_codes'] : [];
 
 // Remaining backup codes count
