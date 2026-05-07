@@ -11,12 +11,31 @@
    Released under the GNU General Public License 
    -------------------------------------------------------*/
   define('MODULE_BX_TOTP_AUTHENTICATOR_TEXT_TITLE', 'BX TOTP Authenticator');
+
+  $description = '
+  <details class="bxac-card">
+    <summary class="bxac-summary" style="list-style: none;">
+      <span class="bxac-arrow">▸</span>
+      <span class="bxac-title">' . xtc_image(DIR_WS_ICONS.'heading/bx_2fa.png', 'BX TOTP Authenticator', '', '', 'style="max-height: 32px; vertical-align: middle; margin-right: 8px;"') . 'BX TOTP Authenticator</span>
+    </summary>
+    <div class="bxac-body">
+      <h3 style="margin-top: 0;">Zwei-Faktor-Authentifizierung</h3>';
+  
   if(defined('MODULE_BX_TOTP_AUTHENTICATOR_STATUS') && MODULE_BX_TOTP_AUTHENTICATOR_STATUS == 'True') {
-    define('MODULE_BX_TOTP_AUTHENTICATOR_TEXT_DESCRIPTION', '<h3 style="margin-top:0; display:flex; align-items:center; gap:8px;">'.xtc_image(DIR_WS_ICONS.'heading/bx_2fa.png', 'BX TOTP Authenticator', '', '', 'style="max-height: 32px;"').' BX TOTP Authenticator</h3><p>Aktiviert die Zwei-Faktor-Authentifizierung - TOTP (Google/Microsoft/Authy Authenticator) zur Absicherung von Kunden-Accounts</p>');
+    $description .= '<p>Aktiviert die Zwei-Faktor-Authentifizierung - TOTP (Google/Microsoft/Authy Authenticator) zur Absicherung von Kunden-Accounts</p>
+    <ul>
+      <li>✅ Einfache Integration in Kunden-Accounts</li>
+      <li>✅ QR-Code für einfache Einrichtung</li>
+      <li>✅ Backup-Codes für Notfälle</li>
+      <li>✅ Kompatibel mit allen TOTP-Apps</li>
+    </ul>';
   } else {
-    define('MODULE_BX_TOTP_AUTHENTICATOR_TEXT_DESCRIPTION', '<h3 style="margin-top: 0;"><h3 style="margin-top:0; display:flex; align-items:center; gap:8px;">'.xtc_image(DIR_WS_ICONS.'heading/bx_2fa.png', 'BX TOTP Authenticator', '', '', 'style="max-height: 32px;"').' BX TOTP Authenticator</h3>
-    <p><a class="button btnbox but_red" style="text-align:center;" onclick="return confirmLink(\'Alle Dateien löschen?\', \'\' ,this);" href="'.xtc_href_link(FILENAME_MODULE_EXPORT, 'set=system&module=bx_totp_authenticator&action=custom&delete=true').'">Alle Moduldateien löschen</a></p>');
+    if(basename($_SERVER['PHP_SELF']) !== 'start.php') {
+      $description .= '<p><a class="button btnbox but_red" style="text-align:center;" onclick="return confirmLink(\'Alle Dateien löschen?\', \'\' ,this);" href="'.xtc_href_link(FILENAME_MODULE_EXPORT, 'set=system&module=bx_totp_authenticator&action=custom&delete=true').'">Alle Moduldateien löschen</a></p>';
+    }
   }
+  $description .= '</div></details>';
+  define('MODULE_BX_TOTP_AUTHENTICATOR_TEXT_DESCRIPTION', $description);
   
   define('MODULE_BX_TOTP_AUTHENTICATOR_SORT_ORDER_TITLE', 'Sortierreihenfolge');
   define('MODULE_BX_TOTP_AUTHENTICATOR_SORT_ORDER_DESC', 'Reihenfolge der Anzeige. Kleinste Ziffer wird zuerst angezeigt.');

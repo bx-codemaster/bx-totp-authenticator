@@ -19,6 +19,7 @@
     public int $sort_order;
     public bool $enabled;
     private bool $_check;
+	  public string $development_status; // 'p' = production ready, 'd' = in development
 
     public function __construct() {
       $this->code        = 'bx_totp_authenticator';
@@ -27,6 +28,7 @@
       $this->description = MODULE_BX_TOTP_AUTHENTICATOR_TEXT_DESCRIPTION;
       $this->sort_order  = ((defined('MODULE_BX_TOTP_AUTHENTICATOR_SORT_ORDER')) ? (int)MODULE_BX_TOTP_AUTHENTICATOR_SORT_ORDER : 0);
       $this->enabled     = ((defined('MODULE_BX_TOTP_AUTHENTICATOR_STATUS') && MODULE_BX_TOTP_AUTHENTICATOR_STATUS == 'True') ? true : false);
+      $this->development_status = 'p';
     }
 
     public function process($file): void {
